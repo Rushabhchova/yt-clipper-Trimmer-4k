@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube Clipper</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="app">
+  <header class="topbar">
+    <h1>🎬 YouTube Clipper</h1>
+    <p class="subtitle">Link paste karo, time select karo, quality chuno — download ho jayega.</p>
+  </header>
+
+  <main class="card">
+
+    <!-- URL Input -->
+    <div class="field">
+      <label for="urlInput">YouTube Link</label>
+      <div class="url-row">
+        <input type="text" id="urlInput" placeholder="https://www.youtube.com/watch?v=...">
+        <button id="fetchBtn" class="btn btn-secondary">Load</button>
+      </div>
+    </div>
+
+    <div id="errorBox" class="error-box hidden"></div>
+
+    <!-- Video Preview -->
+    <div id="previewSection" class="preview-section hidden">
+      <div class="preview-grid">
+        <div class="thumb-wrap">
+          <img id="thumbImg" src="" alt="thumbnail">
+        </div>
+        <div class="video-meta">
+          <h2 id="videoTitle">-</h2>
+          <p id="videoMeta" class="meta-line">-</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Time Selection -->
+    <div id="timeSection" class="section hidden">
+      <label>⏱️ Time Selection</label>
+
+      <div class="time-inputs">
+        <div class="time-field">
+          <span>Start</span>
+          <input type="text" id="startTime" value="00:00:00" placeholder="HH:MM:SS">
+        </div>
+        <div class="time-field">
+          <span>End</span>
+          <input type="text" id="endTime" value="00:00:00" placeholder="HH:MM:SS">
+        </div>
+      </div>
+
+      <div class="slider-wrap">
+        <input type="range" id="startSlider" min="0" max="100" value="0">
+        <input type="range" id="endSlider" min="0" max="100" value="100">
+      </div>
+    </div>
+
+    <!-- Quality + Format -->
+    <div id="optionsSection" class="section hidden">
+      <div class="options-grid">
+        <div class="field">
+          <label for="qualitySelect">📹 Quality</label>
+          <select id="qualitySelect">
+            <option value="auto">Auto</option>
+            <option value="480p">480p</option>
+            <option value="720p">720p</option>
+            <option value="1080p">1080p</option>
+            <option value="1440p">1440p</option>
+            <option value="4k">4K</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="formatSelect">🎵 Format</label>
+          <select id="formatSelect">
+            <option value="mp4">MP4</option>
+            <option value="mp3">MP3</option>
+            <option value="m4a">M4A</option>
+            <option value="webm">WEBM</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Download -->
+    <div id="downloadSection" class="section hidden">
+      <button id="downloadBtn" class="btn btn-primary">⬇️ Download</button>
+
+      <div id="progressWrap" class="progress-wrap hidden">
+        <div class="progress-bar-bg">
+          <div id="progressBar" class="progress-bar-fill"></div>
+        </div>
+        <span id="progressLabel">0%</span>
+      </div>
+
+      <a id="fileLink" class="hidden" href="#" download></a>
+    </div>
+
+  </main>
+
+  <footer class="footnote">
+    Sirf apne personal use ke liye. Video ka copyright uske owner ke paas hai.
+  </footer>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
